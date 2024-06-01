@@ -24,6 +24,7 @@ import { Button } from "~/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { toast } from "sonner";
 
 interface Props {
   school?: Schools;
@@ -43,17 +44,23 @@ export default function SchoolForm({ school }: Props) {
       setIsSubmitting(true);
 
       if (school) {
-        await axios.patch(`/api/schools/${school.id}`, data);
+        await axios.patch(`/api/schools/${school.id}`, data).then(() => {
+          toast.success(`School has been updated.`);
+          setIsSubmitting(false);
+          router.push(`/schools/${school.id}`);
+          router.refresh();
+        });
       } else {
-        await axios.post("/api/schools", data);
+        await axios.post("/api/schools", data).then(() => {
+          toast.success(`School has been created.`);
+          setIsSubmitting(false);
+          router.push("/schools");
+          router.refresh();
+        });
       }
-
-      setIsSubmitting(false);
-
-      router.push("/schools");
-      router.refresh();
     } catch (error) {
       console.log(error);
+      toast.error("Unknown error");
       setIsSubmitting(false);
     }
   }

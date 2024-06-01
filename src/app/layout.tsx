@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import Header from "~/components/header/header";
 import { ThemeProvider } from "~/components/header/theme-provider";
+import { Toaster } from "~/components/ui/sonner";
 
 export const metadata = {
   title: "My-crud",
@@ -26,6 +27,7 @@ export default function RootLayout({
 
           <main className="flex flex-col items-center">
             <div className="w-full max-w-6xl">{children}</div>
+            <Toaster />
           </main>
         </ThemeProvider>
       </body>
