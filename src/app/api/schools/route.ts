@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import {
   type SchoolFormData,
@@ -18,6 +19,8 @@ export async function POST(request: NextRequest) {
   const newSchool = await db.schools.create({
     data: { ...validatedBody },
   });
+
+  revalidatePath("/schools");
 
   return NextResponse.json(newSchool, { status: 200 });
 }
