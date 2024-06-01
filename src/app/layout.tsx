@@ -6,7 +6,7 @@ import { ThemeProvider } from "~/components/header/theme-provider";
 import { Toaster } from "~/components/ui/sonner";
 
 export const metadata = {
-  title: "My-crud",
+  title: "iCrud",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
