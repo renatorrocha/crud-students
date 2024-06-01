@@ -39,7 +39,7 @@ enum Status {
 //     STUDENT
 // }
 
-model Student {
+model Students {
     id        String   @id @default(uuid())
     name      String
     email     String
@@ -50,14 +50,14 @@ model Student {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    School School @relation(fields: [SchoolId], references: [id])
+    School Schools @relation(fields: [SchoolId], references: [id])
 }
 
-model School {
+model Schools {
     id     String @id @default(uuid())
     name   String
     email  String
     status Status @default(ACTIVATED)
 
-    students Student[]
+    students Students[]
 }
