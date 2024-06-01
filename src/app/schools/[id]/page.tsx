@@ -50,12 +50,12 @@ export default async function ViewSchoolDetailsPage({
             Edit School
           </Link>
 
-          <Link
+          {/* <Link
             href={`/schools/edit/${school.id}`}
             className={`${buttonVariants({ variant: "destructive" })}`}
           >
             Delete School
-          </Link>
+          </Link> */}
         </aside>
       </div>
     </div>
