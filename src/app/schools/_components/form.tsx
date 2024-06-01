@@ -49,7 +49,7 @@ export default function SchoolForm({ school }: Props) {
           toast.success(`School has been updated.`);
           setIsSubmitting(false);
           router.push(`/schools/${school.id}`);
-          router.refresh();
+          revalidatePath("/schools");
         });
       } else {
         await axios.post("/api/schools", data).then(() => {
@@ -57,7 +57,6 @@ export default function SchoolForm({ school }: Props) {
           setIsSubmitting(false);
           router.push("/schools");
           revalidatePath("/schools");
-          router.refresh();
         });
       }
     } catch (error) {
