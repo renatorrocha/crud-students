@@ -1,5 +1,5 @@
 import { db } from "~/server/db";
-import DataTable from "./data-table";
+import DataTable from "../../components/data-table";
 import { columns } from "./columns";
 
 export default async function SchoolsPage() {
