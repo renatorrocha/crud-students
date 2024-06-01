@@ -25,6 +25,7 @@ import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
+import { revalidatePath } from "next/cache";
 
 interface Props {
   school?: Schools;
@@ -55,6 +56,7 @@ export default function SchoolForm({ school }: Props) {
           toast.success(`School has been created.`);
           setIsSubmitting(false);
           router.push("/schools");
+          revalidatePath("/schools");
           router.refresh();
         });
       }
