@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import {
   type SchoolFormData,
@@ -33,24 +34,26 @@ export async function PATCH(
     },
   });
 
+  revalidatePath("/schools");
+
   return NextResponse.json(updatedSchool, { status: 200 });
 }
 
-export async function DELETE({ params }: { params: { id: string } }) {
-  const school = await db.schools.findUnique({
-    where: { id: params.id },
-  });
+// export async function DELETE({ params }: { params: { id: string } }) {
+//   const school = await db.schools.findUnique({
+//     where: { id: params.id },
+//   });
 
-  if (!school) {
-    return NextResponse.json({ error: "School Not Found." }, { status: 404 });
-  }
+//   if (!school) {
+//     return NextResponse.json({ error: "School Not Found." }, { status: 404 });
+//   }
 
-  await db.schools.delete({
-    where: { id: school.id },
-  });
+//   await db.schools.delete({
+//     where: { id: school.id },
+//   });
 
-  return NextResponse.json(
-    { message: "School deleted successfully." },
-    { status: 200 },
-  );
-}
+//   return NextResponse.json(
+//     { message: "School deleted successfully." },
+//     { status: 200 },
+//   );
+// }
