@@ -1,4 +1,11 @@
-import type { School } from "@prisma/client";
+"use client";
+
+import {
+  type ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import {
   TableHeader,
   TableRow,
@@ -8,42 +15,64 @@ import {
   Table,
 } from "~/components/ui/table";
 
-interface Props {
-  data: School[];
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
 }
 
-export default function DataTable({ data }: Props) {
+export default function DataTable<TData, TValue>({
+  columns,
+  data,
+}: DataTableProps<TData, TValue>) {
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
   return (
-    <div className="mt-5 w-full">
-      <div className="rounded-md sm:border">
-        <Table>
-          <TableHeader className="bg-gray-600/20">
-            <TableRow>
-              <TableHead className="w-32 border">
-                <div className="flex justify-center">Name</div>
-              </TableHead>
-              <TableHead className="w-32">Email</TableHead>
-              <TableHead className="w-[100px]">
-                <div className="flex justify-center">Status</div>
-              </TableHead>
+    <div className="rounded-md border">
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </TableHead>
+                );
+              })}
             </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {data.map((school) => (
-              <TableRow key={school.id}>
-                <TableCell className="border font-medium">
-                  {school.name}
-                </TableCell>
-                <TableCell className="border">{school.email}</TableCell>
-                <TableCell className="border text-right">
-                  {school.status}
-                </TableCell>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                No results.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 }
