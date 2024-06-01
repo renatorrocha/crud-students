@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import BackButton from "~/components/back-button";
 import { db } from "~/server/db";
 
 const SchoolForm = dynamic(() => import("../../_components/form"), {
@@ -18,5 +19,11 @@ export default async function EditSchoolPage({
     return <p className="text-destructive">School Not Found</p>;
   }
 
-  return <SchoolForm school={school} />;
+  return (
+    <div className="flex flex-col gap-4">
+      <BackButton href={`/schools/${school.id}`} />
+
+      <SchoolForm school={school} />
+    </div>
+  );
 }

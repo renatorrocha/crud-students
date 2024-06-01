@@ -6,8 +6,8 @@ import { cn } from "~/lib/utils";
 
 const navLinks = [
   { label: "Schools", href: "/schools" },
-  { label: "Students", href: "/students" },
-  { label: "Users", href: "/users" },
+  // { label: "Students", href: "/students" },
+  // { label: "Users", href: "/users" },
 ];
 
 export default function NavLinks() {
