@@ -1,6 +1,6 @@
 import { db } from "~/server/db";
 
-export default async function ViewSchoolDetails({
+export default async function ViewSchoolDetailsPage({
   params,
 }: {
   params: { id: string };

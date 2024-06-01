@@ -54,7 +54,9 @@ export const columns: ColumnDef<Schools>[] = [
                 View school details
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>Edit school</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/schools/edit/${row.original.id}`}>Edit school</Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
