@@ -49,13 +49,22 @@ export const columns: ColumnDef<Schools>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-            <DropdownMenuItem>
-              <Link href={`/schools/${row.original.id}`}>
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/schools/${row.original.id}`}
+                className="cursor-pointer"
+              >
                 View school details
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href={`/schools/edit/${row.original.id}`}>Edit school</Link>
+
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/schools/edit/${row.original.id}`}
+                className="cursor-pointer"
+              >
+                Edit school
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
