@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import {
   type SchoolFormData,
@@ -32,6 +33,8 @@ export async function PATCH(
       ...validatedBody,
     },
   });
+
+  revalidatePath("/schools");
 
   return NextResponse.json(updatedSchool, { status: 200 });
 }
