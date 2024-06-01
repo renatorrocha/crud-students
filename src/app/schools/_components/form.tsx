@@ -2,7 +2,7 @@
 
 import type { Schools } from "@prisma/client";
 import { useState } from "react";
-import { type SchoolFormData, SchoolSchema } from "./school-schema";
+import { type SchoolFormData, SchoolSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {

@@ -3,6 +3,7 @@
 import type { Schools } from "@prisma/client";
 import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
 import StatusBadge from "~/components/status-badge";
 import { Button } from "~/components/ui/button";
 import {
@@ -48,7 +49,11 @@ export const columns: ColumnDef<Schools>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-            <DropdownMenuItem>View school details</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/schools/${row.original.id}`}>
+                View school details
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>Edit school</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

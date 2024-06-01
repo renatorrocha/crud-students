@@ -1,6 +1,6 @@
 import { db } from "~/server/db";
 import DataTable from "../../components/data-table";
-import { columns } from "./_components/school-columns";
+import { columns } from "./_components/columns";
 import Link from "next/link";
 import { buttonVariants } from "~/components/ui/button";
 
